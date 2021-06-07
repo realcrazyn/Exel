@@ -1,7 +1,6 @@
 import {$} from '@core/dom';
 
-export function resize(event, $root) {
-	if (event.target.dataset.resize) {
+export function resizeHandler($root, event) {
 		const $resizer = $(event.target)
 		const $parent = $resizer.closest('[data-type]')
 		const cords = $parent.getCoords()
@@ -37,5 +36,4 @@ export function resize(event, $root) {
 			document.onmousemove = null
 			document.onmouseup = null
 		}
-	}
 }
