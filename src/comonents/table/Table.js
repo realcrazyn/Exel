@@ -7,6 +7,8 @@ import {matrix} from '@/comonents/table/table.functions';
 import {TableSelection} from '@/comonents/table/TableSelection';
 import {$} from '@core/dom';
 import * as actions from '@/redux/actions';
+import {defaultStyles} from '@/constants';
+import {parse} from '@core/parse';
 
 const rowsCount = 30;
 
@@ -28,17 +30,29 @@ export class Table extends ExcelComponent {
 		super.init()
 		const $cell = this.$root.find('[data-id="0:0"]')
 		this.selectCell($cell)
-		this.$on('formula:input', text => {
+		this.$on('formula:input', value => {
+			this.selection.current.attr('data-value', value)
+			const text = parse(value)
 			this.selection.current.text(text)
+			this.updateTextInStore(value)
 		})
 		this.$on('formula:done', () => {
 			this.selection.current.focus()
+		})
+		this.$on('toolbar:applyStyle', value => {
+			this.selection.applyStyle(value)
+			this.$dispatch(actions.applyStyle({
+				value,
+				ids: this.selection.selectedIds
+			}))
 		})
 	}
 
 	selectCell($cell) {
 		this.selection.select($cell)
 		this.$emit('table:select', $cell)
+		const styles = $cell.getStyles(Object.keys(defaultStyles))
+		this.$dispatch(actions.changeStyles(styles))
 	}
 
 	toHTML() {
@@ -84,8 +98,16 @@ export class Table extends ExcelComponent {
 			this.selectCell($next)
 		}
 	}
+	updateTextInStore(value) {
+		this.$dispatch(actions.changeText({
+			id: this.selection.current.id(),
+			value
+		}))
+	}
+
 	onInput(event) {
-		this.$emit('table:input', $(event.target))
+		// this.$emit('table:input', $(event.target))
+		this.updateTextInStore($(event.target).text())
 	}
 }
 
