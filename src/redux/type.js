@@ -3,4 +3,5 @@ export const CHANGE_TEXT = 'CHANGE_TEXT'
 export const CHANGE_TITLE = 'CHANGE_TITLE'
 export const APPLY_STYLE = 'APPLY_STYLE'
 export const CHANGE_STYLES = 'CHANGE_STYLES'
+export const LAST_DATE = 'LAST_DATE'
 

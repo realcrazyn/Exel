@@ -1,5 +1,5 @@
 import {
-	CHANGE_TEXT, CHANGE_STYLES, TABLE_RESIZE, APPLY_STYLE, CHANGE_TITLE
+	CHANGE_TEXT, CHANGE_STYLES, TABLE_RESIZE, APPLY_STYLE, CHANGE_TITLE, LAST_DATE
 } from '@/redux/type';
 
 
@@ -38,3 +38,10 @@ export function applyStyle(data) {
 		data
 	}
 }
+
+export function lastDate() {
+	return {
+		type: LAST_DATE
+	}
+}
+
