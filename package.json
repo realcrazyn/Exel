@@ -4,7 +4,8 @@
   "description": "Pure JS single page application",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "start": "cross-env NODE_ENV=development webpack serve --open",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "lint": "npx eslint ./src"
@@ -39,6 +40,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-loader": "^4.0.2",
     "html-webpack-plugin": "^5.3.1",
+    "jest": "^27.0.4",
     "mini-css-extract-plugin": "^1.6.0",
     "sass": "^1.34.0",
     "sass-loader": "^11.1.1",
@@ -47,6 +49,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1"
+    "@babel/polyfill": "^7.12.1",
+    "eslint-plugin-jest": "^24.3.6"
   }
 }
